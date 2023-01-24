@@ -12,6 +12,18 @@ const getAllItems = async (request, response) => {
   }
 };
 
+const getItemById = async (request, response) => {
+  const { id } = request.params;
+
+  try {
+    const data = await ProductsCollection.findById(id);
+    response.send({ payload: data });
+  } catch (error) {
+    console.log(error);
+    response.send({ error });
+  }
+};
+
 const createItem = async (request, response) => {
   try {
     const { body, file } = request;
@@ -39,4 +51,17 @@ const createItem = async (request, response) => {
   }
 };
 
-module.exports = { getAllItems, createItem };
+const updateItem = async (request, response) => {
+  const { id } = request.params;
+  const { body } = request.body;
+
+  try {
+    const data = ProductsCollection.findByIdAndUpdate(id, body);
+    response.status(201).send({ payload: data });
+  } catch (error) {
+    console.log(error);
+    response.status(400).send({ error });
+  }
+};
+
+module.exports = { getAllItems, getItemById, createItem, updateItem };
