@@ -14,7 +14,6 @@ const getAllItems = async (request, response) => {
 
 const getItemById = async (request, response) => {
   const { id } = request.params;
-
   try {
     const data = await ProductsCollection.findById(id);
     response.send({ payload: data });
@@ -51,13 +50,14 @@ const createItem = async (request, response) => {
   }
 };
 
+// Important: request should be in json format.
 const updateItem = async (request, response) => {
   const { id } = request.params;
-  const { body } = request.body;
+  const { body } = request;
 
   try {
-    const data = ProductsCollection.findByIdAndUpdate(id, body);
-    response.status(201).send({ payload: data });
+    const data = await ProductsCollection.findByIdAndUpdate(id, body);
+    response.status(202).send({ payload: data });
   } catch (error) {
     console.log(error);
     response.status(400).send({ error });
