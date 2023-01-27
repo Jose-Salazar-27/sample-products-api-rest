@@ -1,5 +1,13 @@
-const { body, check } = require('express-validator');
+const { body, check, param } = require('express-validator');
 const validateResults = require('../utilities/validate-results.utilitie');
+const ErrorMessages = require('../utilities/error-messages.utilitie');
+
+const getSingleProductValidator = [
+  param('id').exists().notEmpty().isMongoId().withMessage(ErrorMessages['mongo-id']),
+  (request, response, next) => {
+    validateResults(request, response, next);
+  },
+];
 
 const updateProductValidator = [
   check('id').exists().notEmpty(),
@@ -13,4 +21,4 @@ const updateProductValidator = [
   },
 ];
 
-module.exports = { updateProductValidator };
+module.exports = { getSingleProductValidator, updateProductValidator };
