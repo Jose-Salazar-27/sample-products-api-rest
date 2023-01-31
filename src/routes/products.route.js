@@ -11,7 +11,7 @@ router.get('/', getAllItems);
 router.get('/:id', getItemValidator, getItemById);
 
 // upload product
-router.post('/', createItemValidator, uploadMiddleWare, createItem);
+router.post('/', uploadMiddleWare, createItemValidator, createItem);
 
 // Update products
 router.put('/:id', updateItemValidator, updateItem);
