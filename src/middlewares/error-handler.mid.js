@@ -1,5 +1,5 @@
 const ErrorHandlerMiddleware = (error, request, response, next) => {
-  console.log('Middleware Error Handling');
+  console.log('========== Middleware Error Handling ==========');
 
   const errorCode = error.statusCode || 500;
   const errorMessage = error.message || 'Something went wrong';
