@@ -9,7 +9,7 @@ const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
-// app.use(express.static(`${__dirname}/storage`));
+app.use(express.static(`${__dirname}/../storage`));
 
 app.use('/api', require('./routes'));
 
